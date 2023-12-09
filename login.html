@@ -1,0 +1,80 @@
+<html>
+<head>
+    <title>ScheduleToCalendar</title>
+    <style>
+        body {
+            background-color: #f1f1f1;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .main {
+            margin: 0 auto;
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            background-color: #fff;
+            border: 1px solid #e5e5e5;
+            margin-top: 50px;
+            box-shadow: 0 0 10px #e5e5e5;
+        }
+
+        .g_id_signin {
+            margin: 0 auto;
+        }
+
+        .g_id_signin * {
+            margin: 10px 0;
+        }
+
+        .main h1 {
+            margin: 0;
+            padding: 0;
+            font-size: 24px;
+            color: #4285f4;
+            margin-bottom: 20px;
+        }
+
+        .main p {
+            font-size: 14px;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .main img {
+            margin: 0 auto;
+            width: 100px;
+        }
+
+        .main a {
+            text-decoration: none;
+            color: #4285f4;
+        }
+
+        .main a:hover {
+            text-decoration: underline;
+        }
+
+        .main a:visited {
+            color: #4285f4;
+        }
+    </style>
+    <meta name="google-signin-client_id" content="796952607356-gsj82osa6j1r7j88vca6ru08q9r5ncda.apps.googleusercontent.com">
+</head>
+<body>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <section class="main">
+        <h1>ScheduleToCalendar</h1>
+        <p>Sign in with Google to get started.</p>
+        <div id="g_id_onload" data-client_id="796952607356-gsj82osa6j1r7j88vca6ru08q9r5ncda.apps.googleusercontent.com"
+            data-context="signin" data-ux_mode="popup"
+            data-login_uri="https://scheduletocalendarbackend-production.up.railway.app/index.php"
+            data-itp_support="true" data-auto_prompt="false"></div>
+
+        <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline"
+            data-text="signin_with" data-size="large" data-logo_alignment="center" data-width="300"></div>
+    </section>
+</body>
+
+</html>
