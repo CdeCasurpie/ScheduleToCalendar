@@ -1,42 +1,69 @@
 <html>
-  <body>
-    <script src="https://accounts.google.com/gsi/client" async></script>
-    <div id="g_id_onload"
-        data-client_id="796952607356-gsj82osa6j1r7j88vca6ru08q9r5ncda.apps.googleusercontent.com"
-        data-context="signin"
-        data-ux_mode="popup"
-        data-login_uri="https://scheduletocalendar-production.up.railway.app/algo.php"
-        data-itp_support="true">
-    </div>
+    <head>
+        <title>ScheduleToCalendar</title>
+        <meta name="google-signin-client_id" content="796952607356-gsj82osa6j1r7j88vca6ru08q9r5ncda.apps.googleusercontent.com">
+        <meta name="google-signin-scope" content="profile email">
+        <meta name="google-signin-cookiepolicy" content="single_host_origin">
+        <meta name="google-signin-callback" content="signinCallback">
+        <style>
+            body {
+                background-color: #f5f5f5;
+                font-family: 'Roboto', sans-serif;
+                font-size: 16px;
+                line-height: 24px;
+                margin: 0;
+                padding: 0;
+            }
+            .main {
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                margin: 72px auto 24px;
+                max-width: 360px;
+                padding: 24px;
+            }
+            .main h1 {
+                color: #1a73e8;
+                font-size: 24px;
+                font-weight: 400;
+                margin: 0 0 16px;
+            }
+            .main p {
+                margin: 0 0 16px;
+            }
+            .main .g_id_signin {
+                margin: 0 auto;
+            }
 
-    <div class="g_id_signin"
-        data-type="standard"
-        data-shape="rectangular"
-        data-theme="outline"
-        data-text="signin_with"
-        data-size="large"
-        data-logo_alignment="center"
-        data-width="300px">
-    </div>
-
-    <script>
-      function onGoogleSignIn(googleUser) {
-        var id_token = googleUser.getAuthResponse().id_token;
-        // Aquí puedes realizar acciones con el token, como enviarlo a tu servidor o utilizarlo en tu aplicación.
-        console.log("ID Token: ", id_token);
-      }
-
-      function onGoogleSignOut() {
-        // Aquí puedes realizar acciones cuando el usuario cierra sesión
-        console.log("Usuario ha cerrado sesión");
-      }
-
-      // Configurar el listener para el evento de inicio de sesión de Google Sign-In
-      google.accounts.id.initialize({
-        client_id: "796952607356-gsj82osa6j1r7j88vca6ru08q9r5ncda.apps.googleusercontent.com",
-        callback: onGoogleSignIn,
-        onLogoutSuccess: onGoogleSignOut
-      });
-    </script>
-  </body>
+            .g_id_signin {
+                margin: 0 auto;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <script src="https://accounts.google.com/gsi/client" async></script>
+            
+        <section class="main">
+            <h1>ScheduleToCalendar</h1>
+            <p>Sign in with Google to get started.</p>
+            <div id="g_id_onload"
+                data-client_id="796952607356-gsj82osa6j1r7j88vca6ru08q9r5ncda.apps.googleusercontent.com"
+                data-context="signin"
+                data-ux_mode="popup"
+                data-login_uri="https://scheduletocalendar-production.up.railway.app/algo.php"
+                data-itp_support="true">
+            </div>
+    
+            <div class="g_id_signin"
+                data-type="standard"
+                data-shape="rectangular"
+                data-theme="outline"
+                data-text="signin_with"
+                data-size="large"
+                data-logo_alignment="center"
+                data-width="300px">
+            </div>
+        </section>
+    </body>
 </html>
