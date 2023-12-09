@@ -1,5 +1,5 @@
 <html>
-    <head>
+<head>
         <title>ScheduleToCalendar</title>
         <meta name="google-signin-client_id" content="796952607356-gsj82osa6j1r7j88vca6ru08q9r5ncda.apps.googleusercontent.com">
         <meta name="google-signin-scope" content="profile email">
@@ -40,30 +40,51 @@
                 width: 100%;
             }
         </style>
-    </head>
-    <body>
-        <script src="https://accounts.google.com/gsi/client" async></script>
-            
-        <section class="main">
-            <h1>ScheduleToCalendar</h1>
-            <p>Sign in with Google to get started.</p>
-            <div id="g_id_onload"
-                data-client_id="796952607356-gsj82osa6j1r7j88vca6ru08q9r5ncda.apps.googleusercontent.com"
-                data-context="signin"
-                data-ux_mode="popup"
-                data-login_uri="https://scheduletocalendarbackend-production.up.railway.app/index.php"
-                data-itp_support="true">
-            </div>
-    
-            <div class="g_id_signin"
-                data-type="standard"
-                data-shape="rectangular"
-                data-theme="outline"
-                data-text="signin_with"
-                data-size="large"
-                data-logo_alignment="center"
-                data-width="300px">
-            </div>
-        </section>
-    </body>
+</head>
+<body>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <section class="main">
+        <h1>ScheduleToCalendar</h1>
+        <p>Sign in with Google to get started.</p>
+        <div
+            id="g_id_onload"
+            data-client_id="796952607356-gsj82osa6j1r7j88vca6ru08q9r5ncda.apps.googleusercontent.com"
+            data-context="signin"
+            data-ux_mode="popup"
+            data-login_uri="https://scheduletocalendarbackend-production.up.railway.app/index.php"
+            data-itp_support="true">
+        </div>
+
+        <div
+            class="g_id_signin"
+            data-type="standard"
+            data-shape="rectangular"
+            data-theme="outline"
+            data-text="signin_with"
+            data-size="large"
+            data-logo_alignment="center"
+            data-width="300">
+        </div>
+    </section>
+
+    <script>
+        // Manejar el evento de inicio de sesión
+        function handleCredentialResponse(response) {
+            const { credential } = response;
+
+            // Aquí puedes enviar el credential al servidor para autenticar al usuario
+            // y realizar cualquier acción adicional, como la creación de eventos en el calendario.
+            console.log("Credential:", credential);
+        }
+
+        // Configurar el evento de carga del botón de inicio de sesión
+        window.onload = function () {
+            google.accounts.id.initialize({
+                client_id: "796952607356-gsj82osa6j1r7j88vca6ru08q9r5ncda.apps.googleusercontent.com",
+                callback: handleCredentialResponse
+            });
+            google.accounts.id.prompt();
+        };
+    </script>
+</body>
 </html>
