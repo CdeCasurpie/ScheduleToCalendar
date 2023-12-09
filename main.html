@@ -7,9 +7,9 @@
     <script src="functions.js"></script>
     <script>
         // check cookies
-        if (!getCookie("token")) {
-            window.location.href = "login.php";
-        }
+        // if (!getCookie("token")) {
+        //     window.location.href = "login.php";
+        // }
 
         // logout
         function logout() {
@@ -51,7 +51,6 @@
             border-radius: 5px;
             border: 1px solid #ccc;
             background: #fff;
-            margin-bottom: 20px;
         }
 
         button {
@@ -64,6 +63,7 @@
             background: #fff;
             font-size: 16px;
             cursor: pointer;
+            margin-top: 20px;
         }
 
         button:hover {
@@ -90,10 +90,32 @@
     </style>
 </head>
 <body>
+    <script>
+        function convert(){
+            alert("convert");
+            const apiURL = "https://www.googleapis.com/calendar/v3/users/me/calendarList";
+            const auth = getCookie("token_type") + " " + getCookie("token");
+            
+            fetch(apiURL, {
+                method: "GET",
+                headers: {
+                    "Authorization": auth
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        }
+    </script>
     <div class="main">
         <h1>ScheduleToCalendar</h1>
         <textArea id="schedule" rows="10" cols="50"></textArea>
 
+        <button onclick="convert()">Convert</button>
         <button onclick="logout()">Logout</button>
     </div>
 </body>
