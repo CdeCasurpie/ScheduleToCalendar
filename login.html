@@ -60,9 +60,16 @@
             color: #4285f4;
         }
     </style>
+    <script src="functions.js"></script>
     <meta name="google-signin-client_id" content="796952607356-gsj82osa6j1r7j88vca6ru08q9r5ncda.apps.googleusercontent.com">
 </head>
 <body>
+    <script>
+        // verificar cookies
+        if (getCookie('token') != "") {
+            window.location.href = "/";
+        }
+    </script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <section class="main">
         <h1>ScheduleToCalendar</h1>
@@ -81,13 +88,21 @@
                 scope: 'https://www.googleapis.com/auth/calendar.readonly \
                         https://www.googleapis.com/auth/calendar',
                 callback: (tokenResponse) => {
-                    console.log(tokenResponse);
+                    if (!tokenResponse.error) {
+                        const token = tokenResponse.access_token;
+                        const expiresIn = tokenResponse.expires_in;
+                        const token_type = tokenResponse.token_type;
+
+                        setCookie('token', token, expiresIn);
+                        setCookie('token_type', token_type, expiresIn);
+
+                        window.location.href = "/";
+                    }
                 },
             });
 
             signInBtn.addEventListener('click', () => {
-                data = client.requestAccessToken();
-                console.log(data);
+                client.requestAccessToken();
             });
         }
     </script>

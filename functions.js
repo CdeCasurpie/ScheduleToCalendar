@@ -16,9 +16,11 @@ function getCookie(name) {
     return cookieValue;
 }
 
-function setCookie(name, value) {
-    var cookie = name + "=" + value + ";";
-    document.cookie = cookie;
+function setCookie(name, value, expires_seconds) {
+    var date = new Date();
+    date.setTime(date.getTime() + (expires_seconds * 1000));
+    var expires = "expires=" + date.toUTCString();
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
 }
 
 function deleteCookie(name) {
