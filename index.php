@@ -8,19 +8,6 @@
 </head>
 <body>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-
-    <h1 id="nombre-usuario">Nombre de Usuario</h1>
-
-    <script>
-        function onSignIn(googleUser) {
-            // Obtener la información del perfil del usuario
-            var profile = googleUser.getBasicProfile();
-
-            // Mostrar el nombre del usuario en un elemento HTML
-            document.getElementById('nombre-usuario').textContent = '¡Hola, ' + profile.getName() + '!';
-        }
-    </script>
-
     <script>
         function getCookie(name) {
             var cookieArr = document.cookie.split(";");
@@ -42,5 +29,28 @@
             onSignIn(token);
         }
     </script>
+
+    
+    <script>
+        const urlApiCalendar = "https://www.googleapis.com/calendar/v3";
+        function onSignIn(googleUser) {
+            const endpointListCalendar = "/users/me/calendarList";
+            let endpoint = urlApiCalendar + endpointListCalendar;
+            
+            fetch(endpoint, {
+                method: "GET",
+                headers: {
+                    'Authorization' : "Bearer " + googleUser,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => console.log(error));
+        }
+    </script>
+
 </body>
 </html>
