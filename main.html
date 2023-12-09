@@ -91,31 +91,39 @@
 </head>
 <body>
     <script>
-        function convert(){
-            alert("convert");
-            const apiURL = "https://www.googleapis.com/calendar/v3/users/me/calendarList";
-            const auth = getCookie("token_type") + " " + getCookie("token");
-            
-            fetch(apiURL, {
-                method: "GET",
+        let calendarId = "";
+        async function createCalendar(title, description) {
+            const url = "https://www.googleapis.com/calendar/v3/calendars";
+            const token = getCookie("token_type") + " " + getCookie("token");
+
+            const data = {
+                "summary": title,
+                "description": description,
+            };
+
+            fetch(url, {
+                method: "POST",
                 headers: {
-                    "Authorization": auth
-                }
+                    "Authorization": token,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
             })
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                calendarId = data.id;
             })
-            .catch(error => {
-                console.log(error);
-            });
+            .catch(error => console.log(error));
         }
+        
+        createCalendar("ScheduleToCalendar", "This is a calendar created by ScheduleToCalendar");
     </script>
     <div class="main">
         <h1>ScheduleToCalendar</h1>
         <textArea id="schedule" rows="10" cols="50"></textArea>
 
-        <button onclick="convert()">Convert</button>
+        <button id="convertBtn">Convert</button>
         <button onclick="logout()">Logout</button>
     </div>
 </body>
