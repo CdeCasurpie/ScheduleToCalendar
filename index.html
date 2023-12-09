@@ -18,5 +18,25 @@
         data-logo_alignment="center"
         data-width="300px">
     </div>
-  <body>
+
+    <script>
+      function onGoogleSignIn(googleUser) {
+        var id_token = googleUser.getAuthResponse().id_token;
+        // Aquí puedes realizar acciones con el token, como enviarlo a tu servidor o utilizarlo en tu aplicación.
+        console.log("ID Token: ", id_token);
+      }
+
+      function onGoogleSignOut() {
+        // Aquí puedes realizar acciones cuando el usuario cierra sesión
+        console.log("Usuario ha cerrado sesión");
+      }
+
+      // Configurar el listener para el evento de inicio de sesión de Google Sign-In
+      google.accounts.id.initialize({
+        client_id: "796952607356-gsj82osa6j1r7j88vca6ru08q9r5ncda.apps.googleusercontent.com",
+        callback: onGoogleSignIn,
+        onLogoutSuccess: onGoogleSignOut
+      });
+    </script>
+  </body>
 </html>
