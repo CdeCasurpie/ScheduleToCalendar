@@ -7,6 +7,19 @@
 
 </head>
 <body>
+    <script src="https://accounts.google.com/gsi/client" onload="console.log('TODO: add onload function')"></script>
+
+    <script>
+        const urlApiCalendar = "https://www.googleapis.com/calendar/v3";
+        const client = google.accounts.oauth2.initTokenClient({
+            client_id: '796952607356-gsj82osa6j1r7j88vca6ru08q9r5ncda.apps.googleusercontent.com',
+            scope: 'https://www.googleapis.com/auth/calendar.readonly',
+            callback: (tokenResponse) => {
+                console.log(tokenResponse);
+            },
+        });
+    </script>
+
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
         function getCookie(name) {
@@ -30,27 +43,6 @@
         }
     </script>
 
-    
-    <script>
-        const urlApiCalendar = "https://www.googleapis.com/calendar/v3";
-        function onSignIn(googleUser) {
-            const endpointListCalendar = "/users/me/calendarList";
-            let endpoint = urlApiCalendar + endpointListCalendar;
-            
-            fetch(endpoint, {
-                method: "GET",
-                headers: {
-                    'Authorization' : "Bearer " + googleUser,
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => console.log(error));
-        }
-    </script>
 
 </body>
 </html>
