@@ -1,48 +1,12 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-        <title>ScheduleToCalendar</title>
-        <meta name="google-signin-client_id" content="796952607356-gsj82osa6j1r7j88vca6ru08q9r5ncda.apps.googleusercontent.com">
-        <meta name="google-signin-scope" content="profile email">
-        <meta name="google-signin-cookiepolicy" content="single_host_origin">
-        <meta name="google-signin-callback" content="signinCallback">
-        <style>
-            body {
-                background-color: #f5f5f5;
-                font-family: 'Roboto', sans-serif;
-                font-size: 16px;
-                line-height: 24px;
-                margin: 0;
-                padding: 0;
-            }
-            .main {
-                background-color: #fff;
-                border-radius: 8px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                margin: 72px auto 24px;
-                max-width: 360px;
-                padding: 24px;
-            }
-            .main h1 {
-                color: #1a73e8;
-                font-size: 24px;
-                font-weight: 400;
-                margin: 0 0 16px;
-            }
-            .main p {
-                margin: 0 0 16px;
-            }
-            .main .g_id_signin {
-                margin: 0 auto;
-            }
-
-            .g_id_signin {
-                margin: 0 auto;
-                width: 100%;
-            }
-        </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScheduleToCalendar</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
-    <script src="https://accounts.google.com/gsi/client" async></script>
     <section class="main">
         <h1>ScheduleToCalendar</h1>
         <p>Sign in with Google to get started.</p>
@@ -52,7 +16,8 @@
             data-context="signin"
             data-ux_mode="popup"
             data-login_uri="https://scheduletocalendarbackend-production.up.railway.app/index.php"
-            data-itp_support="true">
+            data-itp_support="true"
+            data-auto_prompt="false">
         </div>
 
         <div
@@ -68,21 +33,32 @@
     </section>
 
     <script>
-        // Manejar el evento de inicio de sesión
-        function handleCredentialResponse(response) {
-            const { credential } = response;
-
-            // Aquí puedes enviar el credential al servidor para autenticar al usuario
-            // y realizar cualquier acción adicional, como la creación de eventos en el calendario.
-            console.log("Credential:", credential);
-        }
-
         // Configurar el evento de carga del botón de inicio de sesión
         window.onload = function () {
             google.accounts.id.initialize({
                 client_id: "796952607356-gsj82osa6j1r7j88vca6ru08q9r5ncda.apps.googleusercontent.com",
-                callback: handleCredentialResponse
+                callback: function(response) {
+                    const { credential } = response;
+
+                    // Enviar el credential al servidor (callback.php) directamente
+                    fetch('https://scheduletocalendarbackend-production.up.railway.app/index.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: `credential=${credential}`,
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        // Manejar la respuesta del servidor (puedes actualizar la interfaz de usuario, etc.)
+                        console.log('Respuesta del servidor:', data);
+                    })
+                    .catch(error => {
+                        console.error('Error al enviar el credential al servidor:', error);
+                    });
+                }
             });
+
             google.accounts.id.prompt();
         };
     </script>
