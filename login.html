@@ -4,6 +4,21 @@
     <link rel="stylesheet" href="css/login.css">
     <script src="functions.js"></script>
     <meta name="google-signin-client_id" content="796952607356-gsj82osa6j1r7j88vca6ru08q9r5ncda.apps.googleusercontent.com">
+    <style>
+        .modal {
+            display: block;
+            position: fixed; 
+            z-index: 100;
+            width: 200px;
+            font-size: 15px;
+            overflow: auto; 
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
     <script>
@@ -16,13 +31,49 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     
     <section class="main">
-        <h1>ScheduleToCalendar</h1>
+        <div class="title">
+            <h1>ScheduleToCalendar</h1>
+            <div class="whatIsThis" id="whatIsThis-btn">?</div>
+        </div>
         <p>Accede con tu cuenta de Google para continuar</p>
         <button id="signIn-btn">
             <img src="google.png" alt="Sign in with Google">
             <label>Acceder con Google</label>
         </button>
     </section>
+
+    <div id="whatIsThis-window" class="modal" style="display: none;">
+        <div class="modal-content">
+            <p>Esta aplicación permite pasar los horarios de UTEC a Google Calendar.</p>
+            <p>Para ello, se debe tener una cuenta de Google y darle permisos a la aplicación para acceder a Google Calendar.</p>
+            <p>La aplicación no almacena ningún dato de los usuarios.</p>
+            <p>Ahorra tiempo y no pierdas tus clases!</p>
+        </div>
+    </div>
+
+    <script>
+        const whatIsThisBtn = document.getElementById('whatIsThis-btn');
+
+        function openWhatIsThis() {
+            const whatIsThisWindow = document.getElementById('whatIsThis-window');
+            // settear coordenadas al mouse
+            whatIsThisWindow.style.top = event.clientY + 'px';
+            whatIsThisWindow.style.left = event.clientX + 'px';
+            whatIsThisWindow.classList.add('modal');
+            whatIsThisWindow.style.display = 'block';
+        }
+
+        function closeWhatIsThis() {
+            const whatIsThisWindow = document.getElementById('whatIsThis-window');
+            whatIsThisWindow.classList.remove('modal');
+            whatIsThisWindow.style.display = 'none';
+        }
+
+        // si el mouse pasa por encima del boton, mostrar la ventana
+        whatIsThisBtn.addEventListener('mouseover', openWhatIsThis);
+        // si sale del boton, cerrar la ventana
+        whatIsThisBtn.addEventListener('mouseout', closeWhatIsThis);
+    </script>
 
     <script>
         let client = "";
