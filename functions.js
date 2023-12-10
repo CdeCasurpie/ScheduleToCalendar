@@ -95,16 +95,33 @@ async function createCalendarAndEvents(title, description, events) {
         .then(response => response.json())
         .then(data => {
             let calendarId = data.id;
+            let porcentaje = 0;
+            actualizarPorcentaje(porcentaje);
 
             for (let i = 0; i < events.length; i++) {
                 setTimeout(() => {
                     subitEvento(calendarId, events[i]);
+                    porcentaje += 100 / events.length;
+                    actualizarPorcentaje(porcentaje);
                 }, 1000 * i);
             }
         })
         .catch(error => console.log(error));
 }
 
+
+function actualizarPorcentaje(porcentaje) {
+    const progress = document.getElementById("progress");
+    progress.style.width = porcentaje + "%";
+    progress.innerHTML = porcentaje + "%";
+
+    if (porcentaje == 100) {
+        setTimeout(() => {
+            progress.style.width = "100%";
+            progress.innerHTML = "Done!";
+        }, 1000);
+    }
+}
 
 function subitEvento(calendarId, event) {
     const url = "https://www.googleapis.com/calendar/v3/calendars/"+ calendarId +"/events";
