@@ -1,0 +1,73 @@
+
+img {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.instructions {
+    width: 30%;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow-y: scroll;
+}s
+
+.instructions h2 {
+    color: #28b663;
+    margin: 20px 0;
+}
+
+.instructions p {
+    margin: 10px 0;
+    font-size: 0.95em;
+    margin-top: 20px;
+    color: rgb(73, 73, 73);
+}
+
+.instructions img {
+    margin: 10px auto;
+    width: 80%;
+}
+
+.instructions .instruction{
+    margin: 10px 0;
+    opacity: 0.9;
+    transition: opacity 1s ease-in-out
+}
+
+.instructions .instruction:hover{
+    opacity: 1;
+    transform: scale(1.01);
+    transition: opacity 1s ease-in-out
+}
+
+.instructions h4 {
+    margin: 20px 0;
+}
+
+#example-json-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#example-json {
+    width: 100%;
+    height: 100%;
+    resize: none;
+}
+
+.title {
+    color: #28b663;
+}
+
+.instructions::-webkit-scrollbar {
+    width: 5px;
+    background: #fff;
+}
+
+.instructions::-webkit-scrollbar-thumb {
+    background: #28b663;
+}

@@ -113,6 +113,8 @@ async function createCalendarAndEvents(title, description, events) {
 function actualizarPorcentaje(porcentaje) {
     const progress = document.getElementById("progress");
     progress.style.width = porcentaje + "%";
+
+    porcentaje = Math.round(porcentaje * 100) / 100; //2 decimales de precisión
     progress.innerHTML = porcentaje + "%";
 
     if (porcentaje == 100) {

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ScheduleToCalendar</title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/instructions.css">
     <script src="functions.js"></script>
     <script>
         //check cookies
@@ -39,27 +40,62 @@
     </style>
 </head>
 <body>
-    <div class="main">
-        <h1>ScheduleToCalendar</h1>
-        <textArea id="schedule" rows="10" cols="50"></textArea>
+    <div class="helper">
+        <div class="main">
+            <h1>ScheduleToCalendar</h1>
+            <textArea id="schedule" rows="10" cols="50"></textArea>
 
-        <div class="progress-bar">
-            <div class="progress-bar-fill" id="progress">...</div>
+            <div class="progress-bar">
+                <div class="progress-bar-fill" id="progress">...</div>
+            </div>
+            <button id="convertBtn">Convert</button>
+            <button onclick="logout()">Logout</button>
+
+            <script>
+                const convertBtn = document.getElementById("convertBtn");
+                convertBtn.addEventListener("click", () => {
+                    const data = readSchedule();
+                    const events = createEvents(data);
+
+                    if (events.length > 0) {
+                        createCalendarAndEvents("ScheduleToCalendar", "Este es un calendario creado con ScheduleToCalendar", events);
+                    }
+                });
+            </script>
         </div>
-        <button id="convertBtn">Convert</button>
-        <button onclick="logout()">Logout</button>
-
-        <script>
-            const convertBtn = document.getElementById("convertBtn");
-            convertBtn.addEventListener("click", () => {
-                const data = readSchedule();
-                const events = createEvents(data);
-
-                if (events.length > 0) {
-                    createCalendarAndEvents("ScheduleToCalendar", "Este es un calendario creado con ScheduleToCalendar", events);
-                }
-            });
-        </script>
+    </div>
+    <div class="instructions">
+        <h2 class="title">Instrucciones</h2>
+        <div class="instruction">
+            <p>1. Dirigete al EDU y ve a la sección de horario</p>
+            <img src="assets/toSchedule.png">
+        </div>
+        <div class="instruction">
+            <p>2. Selecciona las fechas de inicio de ciclo y las de fin de ciclo</p>
+            <img src="assets/selectDates.png">
+        </div>
+        <div class="instruction">
+        <p>3. Abre el inspector de elementos (click derecho > inspeccionar) y dirigete a la pestaña de network</p>
+            <img src="assets/inspeccionar.png">
+            <img src="assets/network.png">
+        </div>
+        <div class="instruction">
+            <p>4. Dale click al botón buscar del EDU y espera a que se cargue el horario</p>
+            <img src="assets/search.png">
+        </div>
+        <div class="instruction">
+            <p>5. En la pestaña de network ubica la palabra "list", dale click y dentro ubica "content"</p>
+            <img src="assets/content.png">
+        </div>
+        <div class="instruction">
+            <p>6. Dale click derecho a "content" y selecciona "copy value"</p>
+            <img src="assets/copyValue.png">
+            <p>Recuerda copiar el valor de "content", no el de todo el objeto</p>
+        </div>
+        <div class="instruction">
+            <p>7. Pega el valor en el esta ventana y dale click en "convert"</p>
+            <h4>¡Listo! Solo espera a que se complete la barra de progreso</h4>
+        </div>
     </div>
 </body>
 </html>
