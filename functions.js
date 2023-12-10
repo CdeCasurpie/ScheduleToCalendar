@@ -97,7 +97,9 @@ async function createCalendarAndEvents(title, description, events) {
             let calendarId = data.id;
 
             for (let i = 0; i < events.length; i++) {
-                subitEvento(calendarId, events[i]);
+                setTimeout(() => {
+                    subitEvento(calendarId, events[i]);
+                }, 1000 * i);
             }
         })
         .catch(error => console.log(error));
