@@ -74,39 +74,43 @@ function convertirFechaHora(fechaHoraString) {
 }
 
 
+
 let calendarId = "";
 async function createCalendarAndEvents(title, description, events) {
-    const url = "https://www.googleapis.com/calendar/v3/calendars";
+    const url = "https://www.googleapis.com/calendar/v3/users/me/calendarList";
+    const url2 = "https://www.googleapis.com/calendar/v3/calendars";
     const token = getCookie("token_type") + " " + getCookie("token");
-
-    const data = {
-        "summary": title,
-        "description": description,
-    };
 
     fetch(url, {
         method: "GET",
         headers: {
             "Authorization": token,
             "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
+        }
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
-            console.log(events);
-            // let calendarId = data.id;
-            // let porcentaje = 0;
-            // actualizarPorcentaje(porcentaje);
-
-            // for (let i = 0; i < events.length; i++) {
-            //     setTimeout(() => {
-            //         subitEvento(calendarId, events[i]);
-            //         porcentaje += 100 / events.length;
-            //         actualizarPorcentaje(porcentaje);
-            //     }, 1000 * i);
-            // }
+            if ("items" in data) {
+                let calendarId = "";
+                for (let i = 0; i < data.items.length; i++) {
+                    const item = data.items[i];
+                    if (item.primary == true) {
+                        calendarId = item.id;
+                        break;
+                    }
+                }
+                
+                let porcentaje = 0;
+                actualizarPorcentaje(porcentaje);
+    
+                for (let i = 0; i < events.length; i++) {
+                    setTimeout(() => {
+                        subitEvento(calendarId, events[i]);
+                        porcentaje += 100 / events.length;
+                        actualizarPorcentaje(porcentaje);
+                    }, 1000 * i);
+                }
+            }
         })
         .catch(error => console.log(error));
 }
