@@ -85,7 +85,7 @@ async function createCalendarAndEvents(title, description, events) {
     };
 
     fetch(url, {
-        method: "POST",
+        method: "GET",
         headers: {
             "Authorization": token,
             "Content-Type": "application/json"
@@ -94,17 +94,19 @@ async function createCalendarAndEvents(title, description, events) {
     })
         .then(response => response.json())
         .then(data => {
-            let calendarId = data.id;
-            let porcentaje = 0;
-            actualizarPorcentaje(porcentaje);
+            console.log(data);
+            console.log(events);
+            // let calendarId = data.id;
+            // let porcentaje = 0;
+            // actualizarPorcentaje(porcentaje);
 
-            for (let i = 0; i < events.length; i++) {
-                setTimeout(() => {
-                    subitEvento(calendarId, events[i]);
-                    porcentaje += 100 / events.length;
-                    actualizarPorcentaje(porcentaje);
-                }, 1000 * i);
-            }
+            // for (let i = 0; i < events.length; i++) {
+            //     setTimeout(() => {
+            //         subitEvento(calendarId, events[i]);
+            //         porcentaje += 100 / events.length;
+            //         actualizarPorcentaje(porcentaje);
+            //     }, 1000 * i);
+            // }
         })
         .catch(error => console.log(error));
 }
